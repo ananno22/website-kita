@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untuk adek 💖</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    overflow-x: hidden;
+    overflow-y: auto;
+    color: white;
+}
+
+/* Background */
+body::before {
+    content: "";
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3, #a18cd1, #fbc2eb);
+    background-size: 400% 400%;
+    animation: gradientMove 10s ease infinite;
+    z-index: -1;
+}
+
+@keyframes gradientMove {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+
+/* Slide */
+.slide {
+    width: 100%;
+    min-height: 100vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    animation: fade 0.5s ease;
+}
+
+@keyframes fade {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+.active {
+    display: flex;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background: white;
+    color: #ff4e8a;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Gallery */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.gallery div {
+    background: rgba(255,255,255,0.2);
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* komentar */
+.comment {
+    background: rgba(255,255,255,0.2);
+    margin: 5px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+/* lily */
+.lily {
+    position: fixed;
+    width: 80px;
+    opacity: 0.7;
+    z-index: 0;
+    animation: float 6s ease-in-out infinite;
+}
+
+.lily:nth-of-type(1) { top: 10%; left: 5%; }
+.lily:nth-of-type(2) { top: 70%; left: 80%; }
+.lily:nth-of-type(3) { top: 40%; left: 50%; }
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+    p { font-size: 14px; }
+
+    .lily {
+        width: 50px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Bunga -->
+<img src="https://pngimg.com/uploads/lily/lily_PNG27.png" class="lily">
+<img src="https://pngimg.com/uploads/lily/lily_PNG32.png" class="lily">
+<img src="https://pngimg.com/uploads/lily/lily_PNG35.png" class="lily">
+
+<!-- Musik -->
+<audio id="musik" loop>
+    <source src="music/Anggi Marito - Tak Segampang Itu (Lyrics) - Dan Music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Slide 1 -->
+<div class="slide active" id="slide1">
+    <h1>Maafin Abang ya sayang okta 💔</h1>
+    <p>
+        Abang sadar Abang banyak salah...  
+        mungkin Abang sering bikin adek kecewa,  
+        tapi jujur Abang gak pernah niat nyakitin adek.  
+        Abang cuma manusia yang masih belajar jadi lebih baik buat adek 🥺  
+    </p>
+    <button onclick="nextSlide()">Lanjut 👉</button>
+</div>
+
+<!-- Slide 2 -->
+<div class="slide" id="slide2">
+    <h2>Kenangan Kita 📸</h2>
+    <div class="gallery">
+
+        <div>
+            <img src="photo/belanja.jpeg">
+            <p>Pertama kali kita belanja bareng 😭</p>
+        </div>
+
+        <div>
+            <img src="photo/photobooth.jpeg">
+            <p>Photobooth pertama kita 💖</p>
+        </div>
+
+        <div>
+            <img src="photo/air terjun.jpeg">
+            <p>Momen paling bahagia</p>
+        </div>
+
+        <div>
+            <img src="photo/kesurupan.jpeg">
+            <p>Adek selalu cantik di mata abang</p>
+        </div>
+
+        <div>
+            <img src="photo/ultah.jpeg">
+            <p>Hari abang kasih cincin ke adek 💍</p>
+        </div>
+
+    </div>
+    <button onclick="nextSlide()">Lanjut 👉</button>
+</div>
+
+<!-- Slide 3 -->
+<div class="slide" id="slide3">
+    <h2>Balas ke Abang ya 💬</h2>
+    <p>Klik tombol di bawah ini kalau adek mau jawab 🥺</p>
+
+    <a href="https://wa.me/6285368008850?text=Adek%20udah%20liat%20semua%20ini...%20Abang%20serius%20minta%20maaf%20🥺💔" target="_blank">
+        <button>Kirim ke WhatsApp 💚</button>
+    </a>
+</div>
+
+<script>
+let currentSlide = 1;
+let musicStarted = false;
+
+function nextSlide() {
+    if (!musicStarted) {
+        let audio = document.getElementById("musik");
+        audio.volume = 0.3;
+        audio.play();
+        musicStarted = true;
+    }
+
+    document.getElementById("slide" + currentSlide).classList.remove("active");
+    currentSlide++;
+    document.getElementById("slide" + currentSlide).classList.add("active");
+}
+</script>
+
+</body>
+</html>
